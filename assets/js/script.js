@@ -48,8 +48,6 @@ generateBtn.addEventListener('click', () => {
   if (numChar === "yes" || numChar === "no") {
 
 
-    console.log(charLeng, upChar, lowChar, specChar, numChar);
-
     charLeng = parseInt (charLeng, 10);
     let myString = 'true';
     let myOtherString = 'false';
@@ -75,11 +73,6 @@ generateBtn.addEventListener('click', () => {
       numChar = (!myOtherString === 'false');
     };
 
-    console.log(typeof charLeng);
-    console.log(charLeng);
-    console.log(typeof upChar, typeof lowChar, typeof specChar, typeof numChar);
-    console.log(upChar, lowChar, specChar, numChar);
-
 
     password.innerText = generatePassword(charLeng, upChar, lowChar, specChar, numChar);
   } else {
@@ -94,13 +87,11 @@ function generatePassword(charLeng, upChar, lowChar, specChar, numChar) {
   let generatedPassword = "";
 
   var typesCount = upChar + lowChar + numChar + specChar;
-  console.log('typesCount: ', typesCount);
 
   var typesArr = [{upChar}, {lowChar}, {numChar}, {specChar}].filter
   (item => Object.values(item)[0]
   );
 
-  console.log("typesArr: ", typesArr);
 
   if(typesCount === 0) {
     return "";
@@ -109,13 +100,11 @@ function generatePassword(charLeng, upChar, lowChar, specChar, numChar) {
   for(let i = 0; i < charLeng; i += typesCount) {
     typesArr.forEach(type => {
       var funcName = Object.keys(type)[0];
-      console.log("funcName: ", funcName);
       generatedPassword += randomFunc[funcName]();
     });
   }
 
   var finalPassword = generatedPassword.slice(0, charLeng);
-  console.log(generatedPassword);
 
   return finalPassword;
 
