@@ -28,18 +28,22 @@ generateBtn.addEventListener('click', () => {
   if (charLeng >= 8 && charLeng <= 128) {
 
   upChar = prompt("Must your password include uppercase letters? 'yes' or 'no'.");
+  upChar = upChar.toLowerCase();
   };
   if (upChar === "yes" || upChar === "no") {
 
   lowChar = prompt("Must your password include lowercase letters?");
+  lowChar = lowChar.toLowerCase();
   };
   if (lowChar === "yes" || lowChar === "no") {
 
   specChar = prompt("Must your password include special characters? 'yes' or 'no'.");
+  specChar = specChar.toLowerCase();
   };
   if (specChar === "yes" || specChar === "no") {
 
   numChar = prompt("Must your password include arabic numerals? 'yes' or 'no'.");
+  numChar = numChar.toLowerCase();
   };
   if (numChar === "yes" || numChar === "no") {
 
