@@ -25,18 +25,26 @@ function writePassword() {
 generateBtn.addEventListener('click', () => {
 
   charLeng = prompt("How many characters between '8' and '128' must your password be?");
+  if (charLeng >= 8 && charLeng <= 128) {
+
   upChar = prompt("Must your password include uppercase letters? 'yes' or 'no'.");
-  lowChar = prompt("Must your password include lowercase letters?");
-  specChar = prompt("Must your password include special characters? 'yes' or 'no'.");
-  numChar = prompt("Must your password include arabic numerals? 'yes' or 'no'.");
-
-
-  console.log(charLeng, upChar, lowChar, specChar, numChar);
-
-  if (charLeng < 8 || charLeng > 128 || !upChar === "yes" || !upChar === "no" || !lowChar === "yes" || !lowChar === "no" || !specChar === "yes" || !specChar === "no" || !numChar === "yes" || !numChar === "no") {
-    alert("Please enter a valid response.");
-    return generateBtn.onclick();
   };
+  if (upChar === "yes" || upChar === "no") {
+
+  lowChar = prompt("Must your password include lowercase letters?");
+  };
+  if (lowChar === "yes" || lowChar === "no") {
+
+  specChar = prompt("Must your password include special characters? 'yes' or 'no'.");
+  };
+  if (specChar === "yes" || specChar === "no") {
+
+  numChar = prompt("Must your password include arabic numerals? 'yes' or 'no'.");
+  };
+  if (numChar === "yes" || numChar === "no") {
+
+
+    console.log(charLeng, upChar, lowChar, specChar, numChar);
 
     charLeng = parseInt (charLeng, 10);
     let myString = 'true';
@@ -69,12 +77,15 @@ generateBtn.addEventListener('click', () => {
     console.log(upChar, lowChar, specChar, numChar);
 
 
-  password.innerText = generatePassword(charLeng, upChar, lowChar, specChar, numChar);
+    password.innerText = generatePassword(charLeng, upChar, lowChar, specChar, numChar);
+  } else {
+    alert("Please enter a valid response.");
+    return charLeng;
+  };
 });
 
 // Generate password function
 function generatePassword(charLeng, upChar, lowChar, specChar, numChar) {
-  // filter out unchecked types and loop over length generator function
 
   let generatedPassword = "";
 
@@ -126,19 +137,3 @@ function getRandomSymbol() {
 var symbols = "!@#$%^&*(){}[]=<>/,."
 return symbols[Math.floor(Math.random() * symbols.length)];
 };
-
-
-
-/*
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-};
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-*/
