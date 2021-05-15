@@ -1,104 +1,129 @@
 // Assignment code hear
-const resultEl = document.getElementById('result');
-const lengthEl = document.getElementById('length');
-const uppercaseEl = document.getElementById('uppercaseEl');
-const lowercaseEl = document.getElementById('lowercase');
-const numbersEl = document.getElementById('numbers');
-const symbolsEl = document.getElementById('symbols');
+var charLeng = "";
+var upChar = "";
+var lowChar = "";
+var specChar = "";
+var numChar = "";
+var finalPassword = "";
+
+var generateBtn = document.getElementById("generate");
 
 var randomFunc = {
-  lower: getRandomLower,
-  upper: getRandomUpper,
-  number: getRandomNumber,
-  symbol: getRandomSymbol
+  lowChar: getRandomLower,
+  upChar: getRandomUpper,
+  numChar: getRandomNumber,
+  specChar: getRandomSymbol
 };
 
-generateBtn.addEventListener("click", writePassword) = function() {
-  var length = +lengthEl.value;
-  var hasLower = null;
-  var hasUpper = null;
-  var hasNumber = null;
-  var hasSymbol = null;
 
-  console.log(length)
+function writePassword() {
+  finalPassword = generatedPassword.slice(0, charLeng)
+  finalPassword = document.querySelector("#password")
+
+} 
+
+generateBtn.addEventListener('click', () => {
+
+  charLeng = prompt("How many characters between '8' and '128' must your password be?");
+  upChar = prompt("Must your password include uppercase letters? 'yes' or 'no'.");
+  lowChar = prompt("Must your password include lowercase letters?");
+  specChar = prompt("Must your password include special characters? 'yes' or 'no'.");
+  numChar = prompt("Must your password include arabic numerals? 'yes' or 'no'.");
 
 
+  console.log(charLeng, upChar, lowChar, specChar, numChar);
 
-  resultEl.innerText = generatePassword( hasLower, hasUpper, hasNumber, hasSymbol, length);
-}
+  if (charLeng < 8 || charLeng > 128 || !upChar === "yes" || !upChar === "no" || !lowChar === "yes" || !lowChar === "no" || !specChar === "yes" || !specChar === "no" || !numChar === "yes" || !numChar === "no") {
+    alert("Please enter a valid response.");
+    return generateBtn.onclick();
+  };
 
-function generatePassword(lower, upper, number, symbol, length) {
+    charLeng = parseInt (charLeng, 10);
+    let myString = 'true';
+    let myOtherString = 'false';
+
+    if (upChar === "yes") {
+      upChar = (myString === 'true');
+    } else {
+      upChar = (!myString === 'false');
+    };
+    if (lowChar === "yes") {
+      lowChar = (myString === 'true');
+    } else {
+      lowChar = (!myOtherString === 'false');
+    };
+    if (specChar === "yes") {
+      specChar = (myString === 'true');
+    } else {
+      specChar = (!myOtherString === 'false');
+    };
+    if (numChar === "yes") {
+      numChar = (myString === 'true');
+    } else {
+      numChar = (!myOtherString === 'false');
+    };
+
+    console.log(typeof charLeng);
+    console.log(charLeng);
+    console.log(typeof upChar, typeof lowChar, typeof specChar, typeof numChar);
+    console.log(upChar, lowChar, specChar, numChar);
+
+
+  password.innerText = generatePassword(charLeng, upChar, lowChar, specChar, numChar);
+});
+
+// Generate password function
+function generatePassword(charLeng, upChar, lowChar, specChar, numChar) {
   // filter out unchecked types and loop over length generator function
 
-  let generatePassword = "";
+  let generatedPassword = "";
 
-  var typesCount = lower + upper + number + symbol;
+  var typesCount = upChar + lowChar + numChar + specChar;
+  console.log('typesCount: ', typesCount);
 
-  var typesArr = [{lower}, {upper}, {number}, {symbol}].filter
+  var typesArr = [{upChar}, {lowChar}, {numChar}, {specChar}].filter
   (item => Object.values(item)[0]
   );
 
   console.log("typesArr: ", typesArr);
 
-  if(typesCoutn === 0) {
+  if(typesCount === 0) {
     return "";
   }
 
-for(let i = 0; i < length; i += typesCount) {
-  typesArr.forEach(type => {
-    var funcName = Object.keys(type)[0];
-
-    generatedPassword += randomFunc[funcName]();
-  });
-}
-
-var finalPassword = generatedPassword.slice(0, length);
-
-
-
-}
-
-
-
-
-/* Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-generateBtn.onclick = function() {
-  var charLeng = prompt("How many characters between '8' and '128' must your password be?");
-  var upChar = prompt("Must your password include uppercase letters? 'yes' or 'no'.");
-  var specChar = prompt("Must your password include special characters? 'yes' or 'no'.");
-  var numChar = prompt("Must your password include arabic numerals? 'yes' or 'no'.");
-  console.log(charLeng, upChar, specChar, numChar);
-
-  if (charLeng < 8 || charLeng > 128 || !upChar === "yes" || !upChar === "no" || !specChar === "yes" || !specChar === "no" || !numChar === "yes" || !numChar === "no") {
-    alert("Please enter a valid response.");
-    return generateBtn.onclick();
-  } else {
-
-
-    numChar = Math.floor(Math.random() * 128);
-    console.log(numChar);
-
-
+  for(let i = 0; i < charLeng; i += typesCount) {
+    typesArr.forEach(type => {
+      var funcName = Object.keys(type)[0];
+      console.log("funcName: ", funcName);
+      generatedPassword += randomFunc[funcName]();
+    });
   }
-*/
+
+  var finalPassword = generatedPassword.slice(0, charLeng);
+  console.log(generatedPassword);
+
+  return finalPassword;
+
+};
+
+
+var generateBtn = document.querySelector("#generate");
 
 
 function getRandomLower() {
-return String.fromCharCode(Math.floor(Math.random() * 26) +97)
-}
+return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+};
 
 function getRandomUpper() {
-return String.fromCharCode(Math.floor(Math.random() * 26) +65)
-}
+return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+};
 
 function getRandomNumber() {
-return String.fromCharCode(Math.floor(Math.random() * 10) +48)
-}
+return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+};
 
 function getRandomSymbol() {
-const symbols = "!@#$%^&*(){}[]=<>/,."
+var symbols = "!@#$%^&*(){}[]=<>/,."
 return symbols[Math.floor(Math.random() * symbols.length)];
 };
 
@@ -116,3 +141,4 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+*/
